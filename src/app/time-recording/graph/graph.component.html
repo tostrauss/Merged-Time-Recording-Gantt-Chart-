@@ -1,0 +1,22 @@
+<div>
+  <h2>Graph of Hours Worked</h2>
+  <div>
+    <label for="start-date">Start Date:</label>
+    <input type="date" id="start-date" [(ngModel)]="startDate" />
+    <label for="end-date">End Date:</label>
+    <input type="date" id="end-date" [(ngModel)]="endDate" />
+    <label for="user">User:</label>
+    <select [(ngModel)]="selectedUser">
+      <option [ngValue]="null">All Users</option>
+      <option *ngFor="let user of users" [ngValue]="user.id">{{ user.username }}</option>
+    </select>
+    <button (click)="applyFilters()">Apply Filters</button>
+  </div>
+  <div>
+    <canvas id="hoursChart"></canvas>
+    <p>{{ graphMessage }}</p>
+  </div>
+</div>
+
+
+
