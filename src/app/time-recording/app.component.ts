@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { GlobalInitializer, AuthGuard } from 'my-library';
+// import { GlobalInitializer, AuthGuard } from 'my-library';
 
 // Globals
 // import { MatchComponent } from './CORE/match/match.component';
@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   ShowHeaderFooter: boolean = true;
 
   constructor(
-    private globalInitializer: GlobalInitializer,
+    // private globalInitializer: GlobalInitializer,
     private router: Router,
   ) {
     // Dynamic Icons * can probably initialize the entire app here 
@@ -70,26 +70,26 @@ export class AppComponent implements OnInit {
 
     // run into function PathsArray
     // GLOBAL INITIALIZER
-    this.globalSubscription = this.globalInitializer.initGlobals(GLOBALS_App,[], 'https://dev.collegerecruit.us/CORE_FE/GATEWAY.php').subscribe((config: any) => {
-      this.globalConfig = config;
+    //this.globalSubscription = this.globalInitializer.initGlobals(GLOBALS_App,[], 'https://dev.collegerecruit.us/CORE_FE/GATEWAY.php').subscribe((config: any) => {
+      //this.globalConfig = config;
 
       // Set Header Footer Show
-      config.SETTINGS.NoHeadFoot.some((pattern: any) => {
-        const regex = new RegExp(`^${pattern.replace(/:\w+/g, '[^/]+')}$`);
-        return regex.test(this.router.url);
-      });
+      //config.SETTINGS.NoHeadFoot.some((pattern: any) => {
+        //const regex = new RegExp(`^${pattern.replace(/:\w+/g, '[^/]+')}$`);
+        //return regex.test(this.router.url);
+      //});
 
       //testing routes
-      if (config.CONFIG.DEBUG === true) {
-        console.log(this.globalInitializer.getRoutes());
-      }
+      //if (config.CONFIG.DEBUG === true) {
+        //console.log(this.globalInitializer.getRoutes());
+      //}
 
-      this.RENDER = true; // Set RENDER to true when config is successfully loaded
-      this.loadingSubject.next(false); // Set loading to false
-    }, (error: any) => {
-      this.RENDER = false; // Set RENDER to false if there is an error
-      this.loadingSubject.next(false); // Set loading to false
-    });
+      // this.RENDER = true; // Set RENDER to true when config is successfully loaded
+      //this.loadingSubject.next(false); // Set loading to false
+    //}, (error: any) => {
+      //this.RENDER = false; // Set RENDER to false if there is an error
+      //this.loadingSubject.next(false); // Set loading to false
+    //});
   }
 
   ngOnDestroy() {

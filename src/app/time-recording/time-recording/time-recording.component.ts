@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TimeRecordingService } from '../services/time-recording.service';
 
 @Component({
   selector: 'app-time-recording',
   templateUrl: './time-recording.component.html',
-  styleUrls: ['./time-recording.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule]
 })
 export class TimeRecordingComponent {
-message: any;
+  message: any;
   constructor(private timeRecordingService: TimeRecordingService) {}
 
-  addRecord(recordForm: NgForm): void {
+  addRecord(recordForm: any): void {
     if (recordForm.valid) {
       const { taskDetails, hoursWorked, date } = recordForm.value;
 

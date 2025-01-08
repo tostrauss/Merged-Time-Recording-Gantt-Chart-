@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  template: '<router-outlet></router-outlet>',
   standalone: true,
-  imports: [RouterModule],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  imports: [RouterOutlet]
 })
-
 export class AppComponent {
-  title = 'MergedProject';
 }
