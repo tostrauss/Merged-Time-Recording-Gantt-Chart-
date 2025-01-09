@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -39,4 +40,10 @@ import { RouterLink } from '@angular/router';
     }
   `]
 })
-export class NavigationComponent {} 
+export class NavigationComponent {
+  constructor(private router: Router) {}
+
+  goToGanttChart(): void {
+    this.router.navigate(['/gantt-chart']);
+  }
+} 

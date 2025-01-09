@@ -1,23 +1,11 @@
-.container {
-    max-width: 900px;
-  }
-  
-.gantt-container {
-    border: 1px solid #ccc;
-    min-height: 500px;
-    position: relative;
-  }
+.gantt-chart-container {
+  height: calc(100vh - 100px);
+  width: 100%;
+  padding: 20px;
+  margin-top: 5rem;
+}
 
-.today_marker {
-    background-color: #FF5722; /* bright orange line */
-    width: 2px; /* line thickness */
-  }
-.gantt-priority-high .gantt_task_content {
-    background-color: #e74c3c !important; /* red */
-  }
-.gantt-priority-medium .gantt_task_content {
-    background-color: #f39c12 !important; /* orange */
-  }
-.gantt-priority-low .gantt_task_content {
-    background-color: #2ecc71 !important; /* green */
-  }
+.gantt-container {
+  width: 100%;
+  height: 100%;
+}

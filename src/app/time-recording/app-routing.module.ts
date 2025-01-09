@@ -5,15 +5,15 @@ import { TimeRecordingComponent } from './time-recording/time-recording.componen
 import { GraphComponent } from './graph/graph.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'time-recording', component: TimeRecordingComponent },
-  { path: 'graph', component: GraphComponent },
+  { path: 'input', component: TimeRecordingComponent },
+  { path: 'graph', component: GraphComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 

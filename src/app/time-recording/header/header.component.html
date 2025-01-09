@@ -1,0 +1,19 @@
+<div class="header">
+  <div class="header-content">
+    <div class="left-section">
+      <button class="nav-button" (click)="goHome()">
+        <i class="fas fa-home"></i>
+        Home
+      </button>
+      <h1>Time-Recording</h1>
+    </div>
+    <div class="nav-buttons">
+      <button class="nav-button" (click)="goToRecordTime()" [class.active]="isRoute('/time-recording/input')">
+        Record Time
+      </button>
+      <button class="nav-button" (click)="goToGraph()" [class.active]="isRoute('/time-recording/graph')">
+        Time Recording Graph
+      </button>
+    </div>
+  </div>
+</div> 

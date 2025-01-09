@@ -2,38 +2,41 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TimeRecordingService } from '../services/time-recording.service';
+import { Router } from '@angular/router';
+import { TimeRecordingHeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-time-recording',
-  templateUrl: './time-recording.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, TimeRecordingHeaderComponent],
+  templateUrl: './time-recording.component.html',
+  styleUrls: ['./time-recording.component.css']
 })
 export class TimeRecordingComponent {
-  message: any;
-  constructor(private timeRecordingService: TimeRecordingService) {}
+  record = {
+    userId: 0,
+    taskDetails: '',
+    hoursWorked: 0,
+    date: new Date().toISOString().split('T')[0]
+  };
+
+  constructor(
+    private timeRecordingService: TimeRecordingService,
+    private router: Router
+  ) {}
 
   addRecord(recordForm: any): void {
     if (recordForm.valid) {
-      const { taskDetails, hoursWorked, date } = recordForm.value;
-
-      const record = {
-        taskDetails,
-        hoursWorked,
-        date,
+      console.log('Adding record:', this.record);
+      this.timeRecordingService.addRecord({...this.record});
+      recordForm.reset();
+      this.record = {
+        userId: 0,
+        taskDetails: '',
+        hoursWorked: 0,
+        date: new Date().toISOString().split('T')[0]
       };
-
-      this.timeRecordingService.addRecord(record).subscribe(
-        () => {
-          console.log('Record added successfully');
-          recordForm.reset(); // Clear the form after submission
-        },
-        (error) => {
-          console.error('Error adding record:', error);
-        }
-      );
-    } else {
-      console.error('Form is invalid');
+      this.router.navigate(['/time-recording/graph']);
     }
   }
 }

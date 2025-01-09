@@ -1,0 +1,35 @@
+.container {
+  max-width: 1200px;
+  margin: 5rem auto 2rem;
+  padding: 0 1rem;
+}
+
+.card {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  border: none;
+}
+
+.card-header {
+  padding: 1.5rem;
+  border-radius: 8px 8px 0 0;
+  background: linear-gradient(45deg, #000000, #1a1a1a);
+  color: white;
+}
+
+.btn-dark {
+  background-color: #000000;
+  border: none;
+  padding: 0.5rem 2rem;
+  transition: all 0.2s ease;
+}
+
+.btn-dark:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-2px);
+}
+
+.chart-container {
+  height: 400px;
+  margin-top: 2rem;
+} 

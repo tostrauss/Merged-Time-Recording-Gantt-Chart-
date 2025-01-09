@@ -1,27 +1,27 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-gantt-header',
+  selector: 'app-time-recording-header',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class TimeRecordingHeaderComponent {
   constructor(private router: Router) {}
 
   goHome(): void {
     this.router.navigate(['/']);
   }
 
-  goToDataInput(): void {
-    this.router.navigate(['/gantt-chart/data-input']);
+  goToRecordTime(): void {
+    this.router.navigate(['/time-recording/input']);
   }
 
-  goToGanttChart(): void {
-    this.router.navigate(['/gantt-chart/chart']);
+  goToGraph(): void {
+    this.router.navigate(['/time-recording/graph']);
   }
 
   isRoute(path: string): boolean {

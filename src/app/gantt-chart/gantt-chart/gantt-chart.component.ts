@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import 'dhtmlx-gantt';
 import { TaskService } from '../services/task.service';
-import { Task } from './models/task.model';
 import { HeaderComponent } from '../header/header.component';
 
 declare let gantt: any;
@@ -11,23 +10,8 @@ declare let gantt: any;
 @Component({
   standalone: true,
   selector: 'app-gantt-chart',
-  template: `
-    <app-gantt-header></app-gantt-header>
-    <div class="gantt-chart-container">
-      <div #ganttContainer class="gantt-container"></div>
-    </div>
-  `,
-  styles: [`
-    .gantt-chart-container {
-      height: calc(100vh - 100px);
-      width: 100%;
-      padding: 20px;
-    }
-    .gantt-container {
-      width: 100%;
-      height: 100%;
-    }
-  `],
+  templateUrl: './gantt-chart.component.html',
+  styleUrls: ['./gantt-chart.component.css'],
   imports: [CommonModule, HeaderComponent]
 })
 export class GanttChartComponent implements OnInit, OnDestroy {
