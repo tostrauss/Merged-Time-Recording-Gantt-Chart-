@@ -3,7 +3,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { GlobalInitializer, AuthGuard } from 'my-library';
-
+import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
 // Globals
 import { HeaderComponent} from './gantt-chart/header/header.component';
 import { checkmarkOutline, personOutline, settingsOutline } from 'ionicons/icons';
