@@ -1,11 +1,90 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { GlobalInitializer, AuthGuard } from 'my-library';
+
+// Globals
+import { HeaderComponent} from './gantt-chart/header/header.component';
+import { checkmarkOutline, personOutline, settingsOutline } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+import path from 'path';
 
 @Component({
   selector: 'app-root',
-  template: '<router-outlet></router-outlet>',
-  standalone: true,
-  imports: [RouterOutlet]
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+
+export class AppComponent implements OnInit {
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  loading$ = this.loadingSubject.asObservable();
+  RENDER: boolean = false;
+  ShowHeaderFooter: boolean = true;
+
+  constructor(
+    private globalInitializer: GlobalInitializer,
+    private router: Router,
+  ) {
+    // Dynamic Icons * can probably initialize the entire app here 
+    addIcons({
+      settingsOutline,
+      personOutline,
+      checkmarkOutline
+    });
+   }
+
+  globalConfig: any;
+  private globalSubscription!: Subscription;
+
+  ngOnInit() {
+    // ROUTING HANDLER
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      window.scrollTo(0, 0);
+    });
+
+    // Paths 
+    /*
+      ready for andrey TO FINISH
+    */
+
+    const RoutingArray = [
+      { path: '', component: 'HomeComponent', canActivate: [AuthGuard] },
+      { path: 'header', component: 'HeaderComponent', canActivate: [AuthGuard] },
+    ];
+
+    // run into function PathsArray
+    // GLOBAL INITIALIZER
+    this.globalSubscription = this.globalInitializer.initGlobals(GLOBALS_App,RoutingArray, 'https://dev.collegerecruit.us/CORE_FE/GATEWAY.php').subscribe((config: any) => {
+      this.globalConfig = config;
+
+      // Set Header Footer Show
+      config.SETTINGS.NoHeadFoot.some((pattern: any) => {
+        const regex = new RegExp(`^${pattern.replace(/:\w+/g, '[^/]+')}$`);
+        return regex.test(this.router.url);
+      });
+
+      //testing routes
+      if (config.CONFIG.DEBUG === true) {
+        console.log(this.globalInitializer.getRoutes());
+      }
+
+      this.RENDER = true; // Set RENDER to true when config is successfully loaded
+      this.loadingSubject.next(false); // Set loading to false
+    }, (error: any) => {
+      this.RENDER = false; // Set RENDER to false if there is an error
+      this.loadingSubject.next(false); // Set loading to false
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.globalSubscription) {
+      this.globalSubscription.unsubscribe();
+    }
+  }
 }
+
+// For addition of variables 
+export var GLOBALS_App: any[] = [];
