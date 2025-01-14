@@ -4,8 +4,11 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import { GlobalInitializer, AuthGuard } from 'my-library';
-import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
+
 // Globals
+import { GanttChartComponent } from './gantt-chart/gantt-chart.component';
+import { TimeRecordingComponent } from './time-recording/time-recording/time-recording.component';
+import { NavigationComponent } from './navigation/navigation.component';
 import { HeaderComponent } from './gantt-chart/header/header.component';
 import { checkmarkOutline, personOutline, settingsOutline } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
@@ -28,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private globalInitializer: GlobalInitializer,
     private router: Router,
-    private myLibrary: MyLibraryService  // <-- Using 'MyLibraryService'
+    // private myLibrary: MyLibraryService
   ) {
     // Dynamic Icons * can probably initialize the entire app here 
     addIcons({
@@ -63,9 +66,9 @@ export class AppComponent implements OnInit, OnDestroy {
       .subscribe(
         (config: any) => {
           this.globalConfig = config;
-          this.myLibrary.setGlobalConfig(config);
-          this.myLibrary.setGlobalInitializer(this.globalInitializer);
-          this.myLibrary.setRouter(this.router);
+          //this.myLibrary.setGlobalConfig(config);
+          //this.myLibrary.setGlobalInitializer(this.globalInitializer);
+          //this.myLibrary.setRouter(this.router);
           this.RENDER = true;
         },
         (error: any) => {
